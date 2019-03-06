@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('kategory', function() {
+	return "hello saya kategory";
+});
+
+Route::resource('kategory', 'KategoryController')->except(['destroy']);
+
+Route::get('/kategory/tambah','KategoryController@tambah');
+
+Route::post('/kategory/store','KategoryController@store');
+
