@@ -25,3 +25,11 @@ Route::get('/kategory/tambah','KategoryController@tambah');
 
 Route::post('/kategory/store','KategoryController@store');
 
+Route::get('layout', function(){
+    return view('layout.master');
+});
+
+Route::get('dashboard', function(){
+    return view('dashboard.index');
+});
+
