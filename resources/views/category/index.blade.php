@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,27 +43,78 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-<header class='main-header'>
-@include('layout.mainheader')
-</header>
+  <header class="main-header">
+        @include('layout.mainheader')
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+        @include('layout.mainsidebar')
+  </aside>
 
-<!-- Left side column. contains the logo and sidebar -->
-<aside class="main-sidebar">
-@include('layout.mainsidebar')
-</aside>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
 
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-@yield('content')
-</div>
+        
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Responsive Hover Table</h3>
 
-<footer class='main-footer'>
-    @include('layout.mainfooter')
-</footer>
+              <div class="box-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
 
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table border="1" width="100%">
+		<tr>
+			<th>ID</th>
+			<th>Nama Kategori</th>
+			<th>SLUG</th>
+			<th>Tanggal Input</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+			<th>Opsi</th>
+		</tr>
+		@foreach($Kategory as $Kategorys)
+		<tr>
+            <td>{{ $Kategorys->id }}</td>
+			<td>{{ $Kategorys->nama_kategory }}</td>
+			<td>{{ $Kategorys->slug }}</td>
+			<td>{{ $Kategorys->tanggal_input_data }}</td>
+            <td>{{ $Kategorys->created_at }}</td>
+            <td>{{ $Kategorys->updated_at }}</td>
+			<td>
+				<a href="/kategory/edit/{{ $Kategorys->id }}">Edit</a>
+				|
+				<a href="/kategory/hapus/{{ $Kategorys->id }}">Hapus</a>
+			</td>
+		</tr>
+		@endforeach
+	</table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+    
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+        @include('layout.mainfooter')
+  </footer>
 
-<!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark">
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
       <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
@@ -256,7 +309,6 @@
 </div>
 <!-- ./wrapper -->
 
-
 <!-- jQuery 3 -->
 <script src="{{ asset('tema/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -278,7 +330,7 @@
 <!-- jQuery Knob Chart -->
 <script src="{{ asset('tema/bower_components/jquery-knob/dist/jquery.knob.min.js') }}"></script>
 <!-- daterangepicker -->
-<script src="{{ asset('tema/bower_components/moment/min/moment.min.j') }}s"></script>
+<script src="{{ asset('tema/bower_components/moment/min/moment.min.js') }}"></script>
 <script src="{{ asset('tema/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 <!-- datepicker -->
 <script src="{{ asset('tema/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>

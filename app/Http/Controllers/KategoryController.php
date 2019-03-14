@@ -17,7 +17,7 @@ class KategoryController extends Controller
     public function index()
     {
         $Kategory = modelKategory::all();
-        return view('Kategory',compact('Kategory'));
+        return view('category.index',compact('Kategory'));
     }
 
     /**

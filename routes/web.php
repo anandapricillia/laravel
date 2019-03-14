@@ -19,6 +19,7 @@ Route::get('kategory', function() {
 	return "hello saya kategory";
 });
 
+
 Route::resource('kategory', 'KategoryController')->except(['destroy']);
 
 Route::get('/kategory/tambah','KategoryController@tambah');
@@ -35,5 +36,13 @@ Route::get('dashboard', function(){
 
 Route::get('dashboard2', function(){
     return view('dashboard.dashboard');
+});
+
+Route::get('kategori', function(){
+    return view('category.index');
+});
+
+Route::get('table', function(){
+    return view('category.index');
 });
 
