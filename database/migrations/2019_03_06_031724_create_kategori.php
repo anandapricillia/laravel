@@ -17,7 +17,6 @@ class CreateKategori extends Migration
             $table->bigIncrements('id');
             $table->string('nama_kategory');
             $table->string('slug');
-            $table->date('tanggal_input_data');
             $table->timestamps();
         });
     }

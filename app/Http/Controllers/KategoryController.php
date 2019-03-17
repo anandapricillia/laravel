@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\modelKategory;
-
+use Illuminate\Support\Facades\DB;
 
 
 class KategoryController extends Controller
@@ -18,6 +18,12 @@ class KategoryController extends Controller
     {
         $Kategory = modelKategory::all();
         return view('category.index',compact('Kategory'));
+    }
+    public function search(Request $request)
+    {
+        $query = $request->input('cari');
+        $hasil = modelKategory::where('nama_kategory', 'LIKE', '%' . $query . '%')->paginate(10);
+        return view('category.result', compact('hasil', 'query'));
     }
 
     /**
@@ -38,14 +44,11 @@ class KategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // insert data ke table pegawai
-	    DB::table('kategori')->insert([
-		'nama_kategory' => $request->nama_kategory,
-		'slug' => $request->slug,
-		'tanggal_input_data' => $request->tanggal_input_data
-	]);
-	// alihkan halaman ke halaman pegawai
-	return redirect('/kategory');
+        DB::table('kategori')->insert([
+            'nama_kategory' => $request->nama_kategori,
+            'slug' => $request->slug
+        ]);
+	    return redirect('/kategory');
     }
 
     /**
@@ -67,7 +70,8 @@ class KategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kategori = DB::table('kategori')->where('id',$id)->get();
+        return view('dashboard.edit',['kategori' => $kategori]);
     }
 
     /**
@@ -77,9 +81,14 @@ class KategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        DB::table('kategori')->where('id',$request->id)->update([
+            'nama_kategory' => $request->nama_kategory,
+            'slug' => $request->slug
+            ]);
+
+            return redirect('/kategory');
     }
 
     /**
@@ -90,12 +99,8 @@ class KategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('kategori')->where('id',$id)->delete();
+        return redirect('/kategory');
     }
 
-    public function tambah()
-    {
-        // memanggil view tambah
-	return view('tambah');
-    }
 }

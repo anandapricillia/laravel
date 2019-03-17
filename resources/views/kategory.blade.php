@@ -22,9 +22,6 @@ body {
 			<th>ID</th>
 			<th>Nama Kategori</th>
 			<th>SLUG</th>
-			<th>Tanggal Input</th>
-            <th>Created At</th>
-            <th>Updated At</th>
 			<th>Opsi</th>
 		</tr>
 		@foreach($Kategory as $Kategorys)
@@ -32,9 +29,6 @@ body {
             <td>{{ $Kategorys->id }}</td>
 			<td>{{ $Kategorys->nama_kategory }}</td>
 			<td>{{ $Kategorys->slug }}</td>
-			<td>{{ $Kategorys->tanggal_input_data }}</td>
-            <td>{{ $Kategorys->created_at }}</td>
-            <td>{{ $Kategorys->updated_at }}</td>
 			<td>
 				<a href="/kategory/edit/{{ $Kategorys->id }}">Edit</a>
 				|

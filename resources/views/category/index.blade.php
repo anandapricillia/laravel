@@ -1,11 +1,12 @@
-
+@extends('layout.master')
+@section('content')
 
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Dashboard</title>
+  <title>AdminLTE 2 | Category</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -58,43 +59,105 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Responsive Hover Table</h3>
 
-              <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+              <div class="box box-danger">
+            <div class="box-header with-border">
+              <h3 class="box-title">Form Search</h3>
+            </div>
+            <form action="{{ url('query') }}" method="GET">
 
-                  <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                  </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-xs-5">
+                  <div class="input-group">
+                <div class="input-group-btn">
+                  <button type="submit" class="btn btn-danger">Cari</button>
+                </div>
+                <!-- /btn-group -->
+                
+                <input type="text" class="form-control" name="cari" placeholder="Search Data Kategori..">
+              </div>
                 </div>
               </div>
             </div>
+          </form>
+            <!-- /.box-body -->
+          </div>
+            </div>
+
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
+            <div class="box box-danger">
+            <div class="box-header">
+              <h3 class="box-title">Data Kategori</h3>
+            </div>
+            
+            <div class="box-body">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                Tambah Data
+              </button>
+              
+              <div class="modal fade" id="modal-default">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Masukkan Data Kategori</h4>
+              </div>
+              <form class="form-horizontal" action="/inputdata/store" method="post">
+              {{csrf_field()}}
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Nama Kategori</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputEmail3" placeholder="Nama Kategori" name="nama_kategori">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">SLUG</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputPassword3" placeholder="Deskripsi" name="slug">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- /.box-body -->
+            
+              <!-- /.box-footer -->
+  
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Kembali</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        </form>
               <table border="1" width="100%">
 		<tr>
 			<th>ID</th>
 			<th>Nama Kategori</th>
 			<th>SLUG</th>
-			<th>Tanggal Input</th>
-            <th>Created At</th>
-            <th>Updated At</th>
 			<th>Opsi</th>
 		</tr>
-		@foreach($Kategory as $Kategorys)
+		@foreach($Kategory as $data)
 		<tr>
-            <td>{{ $Kategorys->id }}</td>
-			<td>{{ $Kategorys->nama_kategory }}</td>
-			<td>{{ $Kategorys->slug }}</td>
-			<td>{{ $Kategorys->tanggal_input_data }}</td>
-            <td>{{ $Kategorys->created_at }}</td>
-            <td>{{ $Kategorys->updated_at }}</td>
+            <td>{{ $data->id }}</td>
+			<td>{{ $data->nama_kategory }}</td>
+			<td>{{ $data->slug }}</td>
 			<td>
-				<a href="/kategory/edit/{{ $Kategorys->id }}">Edit</a>
+				<a href="/edit/edit/{{ $data->id }}">Edit</a>
 				|
-				<a href="/kategory/hapus/{{ $Kategorys->id }}">Hapus</a>
+				<a href="/hapus/destroy/{{ $data->id }}">Hapus</a>
 			</td>
 		</tr>
 		@endforeach
